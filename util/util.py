@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 import os
 from collections import OrderedDict
-from IPython import embed
+#from IPython import embed #Raised import error (even if it's not used), so commented out
 
 # Converts a Tensor into an image array (numpy)
 # |imtype|: the desired type of the converted numpy array
