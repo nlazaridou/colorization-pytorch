@@ -24,8 +24,8 @@ if __name__ == '__main__':
     opt.num_threads = 1   # test code only supports num_threads = 1
     opt.batch_size = 1  # test code only supports batch_size = 1
     opt.display_id = -1  # no visdom display
-    opt.phase = 'minitest2017'
-    opt.dataroot = 'C:/Users/ninal/Desktop/THESIS/coco_dataset/%s/' % opt.phase
+    opt.phase = 'val'
+    opt.dataroot = './dataset/ilsvrc2012/%s/' % opt.phase
     opt.serial_batches = True
     opt.aspect_ratio = 1.
 
@@ -48,15 +48,12 @@ if __name__ == '__main__':
     entrs = np.zeros((opt.how_many, S))
 
     for i, data_raw in enumerate(dataset_loader):
-        #data_raw[0] = data_raw[0].cuda()
+        data_raw[0] = data_raw[0].cuda()
         data_raw[0] = util.crop_mult(data_raw[0], mult=8)
 
         # with no points
         for (pp, sample_p) in enumerate(sample_ps):
-            #img_path = [string.replace('%08d_%.3f' % (i, sample_p), '.', 'p')]  #python 2.7 probably
-            formatted_string = '%08d_%.3f' % (i, sample_p)
-            img_path = [formatted_string.replace('.', 'p')] #python 3.6
-
+            img_path = [string.replace('%08d_%.3f' % (i, sample_p), '.', 'p')]
             data = util.get_colorization_data(data_raw, opt, ab_thresh=0., p=sample_p)
 
             model.set_input(data)
