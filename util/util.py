@@ -269,8 +269,8 @@ def add_color_patch(data,mask,opt,P=1,hw=[128,128],ab=[0,0]):
 def crop_mult(data,mult=16,HWmax=[800,1200]):
     # crop image to a multiple
     H,W = data.shape[2:]
-    Hnew = int(min(H/mult*mult,HWmax[0]))
-    Wnew = int(min(W/mult*mult,HWmax[1]))
+    Hnew = int(min(H//mult*mult,HWmax[0]))#assumption that the author wanted to do floor division.
+    Wnew = int(min(W//mult*mult,HWmax[1]))#ensuring Hnew (and Wnew) are a multiple of mult
     h = (H-Hnew)//2
     w = (W-Wnew)//2
 
